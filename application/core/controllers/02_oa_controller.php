@@ -23,7 +23,8 @@ class Oa_controller extends Root_controller {
 
   public function __construct () {
     parent::__construct ();
-    $this->add_meta (array ('http-equiv' => 'Content-type', 'content' => 'text/html; charset=utf-8'));
+    $this->add_meta (array ('http-equiv' => 'Content-type', 'content' => 'text/html; charset=utf-8'))
+         ->add_hidden (array ('id' => 'ajax_navbar_url', 'value' => base_url ('ajax', 'navbar')));
   }
 
   protected function set_componemt_path () {
@@ -48,6 +49,12 @@ class Oa_controller extends Root_controller {
 
   protected function set_title ($title) {
     $this->title = $title;
+    return $this;
+  }
+
+  protected function set_subtitle ($subtitle) {
+    if (is_string ($subtitle))
+      $this->add_param ('subtitle', $subtitle);
     return $this;
   }
 
